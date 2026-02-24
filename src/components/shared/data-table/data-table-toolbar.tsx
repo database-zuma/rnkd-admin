@@ -25,14 +25,14 @@ export function DataTableToolbar<TData>({
       <div className="flex flex-1 items-center space-x-2">
         {searchKey && (
           <div className="relative w-full max-w-sm">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-rnkd-text-tertiary" />
+            <Search className="absolute left-3 top-2.5 h-4 w-4 text-[#8E8E93]" />
             <Input
               placeholder={searchPlaceholder ?? `Search...`}
               value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
               onChange={(event) =>
                 table.getColumn(searchKey)?.setFilterValue(event.target.value)
               }
-              className="pl-9 bg-rnkd-bg-surface border-rnkd-border-light text-rnkd-text-primary placeholder:text-rnkd-text-tertiary focus-visible:ring-rnkd-volt h-9 w-[150px] lg:w-[250px]"
+              className="pl-9 bg-[#1C1C1E]/60 border-white/[0.08] text-[#F5F5F7] placeholder:text-[#8E8E93] focus-visible:ring-[#D2F802]/30 focus-visible:border-[#D2F802]/30 h-9 w-[150px] lg:w-[280px] rounded-xl backdrop-blur-sm transition-all duration-200"
             />
           </div>
         )}

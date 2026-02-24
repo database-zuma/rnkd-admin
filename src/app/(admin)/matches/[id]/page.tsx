@@ -45,7 +45,7 @@ export default async function MatchDetailPage({ params }: { params: Promise<{ id
 
   return (
     <div className="p-6 space-y-6">
-      <Link href="/matches" className="inline-flex items-center gap-1.5 text-sm text-[#A1A1A6] hover:text-[#F5F5F7] transition-colors">
+      <Link href="/matches" className="inline-flex items-center gap-1.5 text-sm text-[#A1A1A6] hover:text-[#D2F802] transition-colors duration-200">
         <IconArrowLeft className="w-4 h-4" /> Back to Matches
       </Link>
 
@@ -80,7 +80,7 @@ export default async function MatchDetailPage({ params }: { params: Promise<{ id
         </div>
 
         {/* Score display */}
-        <div className="text-center py-8">
+        <div className="text-center py-10">
           <div className="flex items-center justify-center gap-8 mb-6">
             <div className={cn("text-right flex-1", t1Won && "opacity-100")}>
               <p className={cn("text-lg font-semibold", t1Won ? "text-[#D2F802]" : "text-[#F5F5F7]")}>
@@ -88,7 +88,7 @@ export default async function MatchDetailPage({ params }: { params: Promise<{ id
               </p>
               {t1Won && <p className="text-xs text-[#D2F802] mt-0.5">WINNER</p>}
             </div>
-            <span className="text-[#A1A1A6] text-sm font-medium shrink-0">VS</span>
+            <span className="text-[#A1A1A6]/60 text-xs font-bold tracking-[0.2em] uppercase shrink-0">VS</span>
             <div className={cn("text-left flex-1", !t1Won && "opacity-100")}>
               <p className={cn("text-lg font-semibold", !t1Won ? "text-[#D2F802]" : "text-[#F5F5F7]")}>
                 {match.team2.players.map((p) => p.name).join(" / ")}
@@ -97,12 +97,12 @@ export default async function MatchDetailPage({ params }: { params: Promise<{ id
             </div>
           </div>
 
-          <div className="flex items-center justify-center gap-6">
+          <div className="flex items-center justify-center gap-8">
             {match.team1.score.map((s, i) => (
               <div key={i} className="flex items-center gap-2">
                 <span
                   className={cn(
-                    "font-mono text-3xl font-bold tabular-nums",
+                    "font-mono text-4xl font-bold tabular-nums tracking-tight",
                     s > match.team2.score[i] ? "text-[#D2F802]" : "text-[#A1A1A6]"
                   )}
                 >
@@ -111,14 +111,14 @@ export default async function MatchDetailPage({ params }: { params: Promise<{ id
                 <span className="text-[#A1A1A6] text-lg">-</span>
                 <span
                   className={cn(
-                    "font-mono text-3xl font-bold tabular-nums",
+                    "font-mono text-4xl font-bold tabular-nums tracking-tight",
                     match.team2.score[i] > s ? "text-[#D2F802]" : "text-[#A1A1A6]"
                   )}
                 >
                   {match.team2.score[i]}
                 </span>
                 {i < match.team1.score.length - 1 && (
-                  <span className="text-white/10 text-xl ml-2">|</span>
+                  <span className="text-white/[0.08] text-2xl ml-3">|</span>
                 )}
               </div>
             ))}
@@ -127,17 +127,17 @@ export default async function MatchDetailPage({ params }: { params: Promise<{ id
       </div>
 
       {/* Player cards */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-5">
         {allPlayers.map((player) => (
-          <div key={player.id} className="glass-card p-5 rounded-[16px] text-center">
-            <div className="w-12 h-12 rounded-full bg-[#2C2C2E] border border-white/[0.08] flex items-center justify-center mx-auto mb-3">
+          <div key={player.id} className="glass-card p-5 rounded-[16px] text-center transition-all duration-200 hover:bg-white/[0.04]">
+            <div className="w-12 h-12 rounded-full bg-[#2C2C2E] border border-white/[0.08] flex items-center justify-center mx-auto mb-3 ring-2 ring-white/[0.04]">
               <span className="text-sm font-medium text-[#A1A1A6]">
                 {player.name.split(" ").map((w) => w[0]).join("").toUpperCase().slice(0, 2)}
               </span>
             </div>
             <p className="text-sm font-medium text-[#F5F5F7] mb-1">{player.name}</p>
             <TierBadge tier="CONTENDER" />
-            <div className="mt-3 pt-3 border-t border-white/[0.06]">
+            <div className="mt-3 pt-3 border-t border-white/[0.06] space-y-1">
               <p className="text-xs text-[#A1A1A6] mb-1">MMR Change</p>
               <MMRDelta delta={player.won ? match.mmr_delta : -match.mmr_delta} />
             </div>

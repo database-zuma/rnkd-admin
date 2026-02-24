@@ -27,21 +27,21 @@ function StatCard({ icon, label, value, trend, alert }: StatCardProps) {
   return (
     <div
       className={cn(
-        "glass-card p-6 rounded-[16px] flex flex-col gap-3 transition-all",
+        "glass-card p-6 rounded-[16px] flex flex-col gap-3 transition-all duration-200 hover:bg-white/[0.04]",
         alert && "border-[#EF4444]/30 shadow-[0_0_20px_rgba(239,68,68,0.1)]"
       )}
     >
       <div className="flex items-center justify-between">
-        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/5">
+        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.04]">
           {icon}
         </div>
         {trend !== undefined && (
           <span
             className={cn(
-              "text-xs font-semibold px-2 py-0.5 rounded-full",
+              "text-xs font-semibold font-mono px-2.5 py-1 rounded-full tabular-nums",
               trend >= 0
-                ? "bg-[rgba(48,209,88,0.15)] text-[#30D158]"
-                : "bg-[rgba(239,68,68,0.15)] text-[#EF4444]"
+                ? "bg-[rgba(48,209,88,0.12)] text-[#30D158]"
+                : "bg-[rgba(239,68,68,0.12)] text-[#EF4444]"
             )}
           >
             {trend >= 0 ? "+" : ""}
@@ -49,7 +49,7 @@ function StatCard({ icon, label, value, trend, alert }: StatCardProps) {
           </span>
         )}
       </div>
-      <span className="text-4xl font-bold font-mono tabular-nums text-[#F5F5F7]">
+      <span className="text-4xl font-bold font-mono tabular-nums text-[#F5F5F7] tracking-tight">
         {typeof value === "number" ? value.toLocaleString() : value}
       </span>
       <span className="text-sm text-[#A1A1A6]">{label}</span>
@@ -75,17 +75,19 @@ export default async function DashboardPage() {
   const last5 = recentMatches.slice(0, 5);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-8">
       <PageHeader title="Dashboard" description="RNKD Operations Overview" />
 
       {/* Row 1 — Stat cards */}
-      <div className="grid grid-cols-5 gap-4">
-        <StatCard
-          icon={<IconUsers className="w-5 h-5 text-[#0A84FF]" />}
-          label="Total Users"
-          value={stats.totalUsers}
-          trend={stats.userTrend}
-        />
+      <div className="grid grid-cols-5 gap-5">
+        <div className="glow-volt">
+          <StatCard
+            icon={<IconUsers className="w-5 h-5 text-[#0A84FF]" />}
+            label="Total Users"
+            value={stats.totalUsers}
+            trend={stats.userTrend}
+          />
+        </div>
         <StatCard
           icon={<IconTrophy className="w-5 h-5 text-[#D2F802]" />}
           label="Matches This Week"
@@ -112,26 +114,29 @@ export default async function DashboardPage() {
       </div>
 
       {/* Row 2 — Charts */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-5">
         <div className="col-span-2 glass-card p-6 rounded-[16px]">
-          <h2 className="text-lg font-semibold text-[#F5F5F7] mb-4">Matches Over Time</h2>
+          <h2 className="text-base font-semibold text-[#F5F5F7] mb-1">Matches Over Time</h2>
+          <p className="text-xs text-[#A1A1A6] mb-5">Last 30 days activity</p>
           <MatchesChart data={chartData} />
         </div>
         <div className="glass-card p-6 rounded-[16px]">
-          <h2 className="text-lg font-semibold text-[#F5F5F7] mb-4">Tier Distribution</h2>
+          <h2 className="text-base font-semibold text-[#F5F5F7] mb-1">Tier Distribution</h2>
+          <p className="text-xs text-[#A1A1A6] mb-5">Current player breakdown</p>
           <TierChart data={tierData} />
         </div>
       </div>
 
       {/* Row 3 — Recent Matches + Quick Stats */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-5">
         <div className="col-span-2 glass-card p-6 rounded-[16px]">
-          <h2 className="text-lg font-semibold text-[#F5F5F7] mb-4">Recent Matches</h2>
+          <h2 className="text-base font-semibold text-[#F5F5F7] mb-1">Recent Matches</h2>
+          <p className="text-xs text-[#A1A1A6] mb-5">Latest completed matches</p>
           <div className="space-y-3">
             {last5.map((m) => (
               <div
                 key={m.id}
-                className="flex items-center justify-between rounded-xl bg-white/[0.03] px-4 py-3 border border-white/[0.04]"
+                className="flex items-center justify-between rounded-xl bg-white/[0.03] px-4 py-3 border border-white/[0.04] transition-all duration-200 hover:bg-white/[0.06] hover:border-white/[0.08] cursor-default"
               >
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-[#F5F5F7] truncate">
@@ -155,8 +160,8 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        <div className="space-y-4">
-          <div className="glass-card p-6 rounded-[16px] flex flex-col gap-2">
+        <div className="space-y-5">
+          <div className="glass-card p-5 rounded-[16px] flex flex-col gap-2">
             <div className="flex items-center gap-3">
               <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/5">
                 <IconCalendar className="w-5 h-5 text-[#D2F802]" />
@@ -169,7 +174,7 @@ export default async function DashboardPage() {
               </div>
             </div>
           </div>
-          <div className="glass-card p-6 rounded-[16px] flex flex-col gap-2">
+          <div className="glass-card p-5 rounded-[16px] flex flex-col gap-2">
             <div className="flex items-center gap-3">
               <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/5">
                 <IconBuilding className="w-5 h-5 text-[#0A84FF]" />

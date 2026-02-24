@@ -66,14 +66,14 @@ export default async function FixtureDetailPage({
   const defaultTab = allCompleted ? 'scores' : hasPlayers ? 'scores' : 'players';
 
   return (
-    <div className="space-y-6">
+    <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">
+          <h1 className="text-2xl font-bold tracking-tight text-[#F5F5F7]">
             {homeClub?.name || '?'} vs {awayClub?.name || '?'}
           </h1>
-          <p className="text-muted-foreground">
+          <p className="mt-1.5 text-sm text-[#A1A1A6]">
             Gameweek {fixture.gameweek} \u00b7 {fixture.scheduled_date || 'TBD'} \u00b7{' '}
             {fixture.venue_name || 'TBD'}
           </p>

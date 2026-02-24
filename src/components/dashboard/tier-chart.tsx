@@ -45,11 +45,13 @@ export function TierChart({ data }: { data: TierData[] }) {
         />
         <Tooltip
           contentStyle={{
-            background: "#1C1C1E",
-            border: "1px solid rgba(255,255,255,0.08)",
+            background: "#2C2C2E",
+            border: "1px solid rgba(255,255,255,0.1)",
             borderRadius: 12,
             color: "#F5F5F7",
             fontSize: 12,
+            boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+            padding: "10px 14px",
           }}
           formatter={(value: number, _name: string, entry: { payload?: TierData }) => [
             `${value} (${entry.payload?.percentage ?? 0}%)`,

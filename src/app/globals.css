@@ -78,7 +78,32 @@
   }
   body {
     @apply bg-black text-[#F5F5F7] antialiased;
+    scroll-behavior: smooth;
   }
+  ::selection {
+    background: rgba(210, 248, 2, 0.25);
+    color: #F5F5F7;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #1C1C1E;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3A3A3C;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #48484A;
+  }
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-color: #3A3A3C #1C1C1E;
+  scrollbar-width: thin;
 }
 
 .glass-card {
@@ -92,4 +117,44 @@
   background: rgba(18, 18, 18, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
+}
+
+/* Subtle glow effects */
+.glow-volt {
+  box-shadow: 0 0 20px rgba(210, 248, 2, 0.08), 0 0 60px rgba(210, 248, 2, 0.04);
+}
+
+.glow-volt-strong {
+  box-shadow: 0 0 20px rgba(210, 248, 2, 0.12), 0 0 60px rgba(210, 248, 2, 0.06);
+}
+
+/* Animated gradient for login */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.animate-fade-in-up-delay-1 {
+  animation: fade-in-up 0.5s ease-out 0.1s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-up-delay-2 {
+  animation: fade-in-up 0.5s ease-out 0.2s forwards;
+  opacity: 0;
 }

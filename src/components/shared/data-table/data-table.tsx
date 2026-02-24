@@ -73,11 +73,11 @@ export function DataTable<TData, TValue>({
       />
       <div className="glass-card rounded-card overflow-hidden">
         <Table>
-          <TableHeader className="bg-[#1C1C1E] uppercase tracking-wide text-xs">
+          <TableHeader className="bg-[#1C1C1E]/80 uppercase tracking-wider text-[10px]">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="border-b-[rgba(255,255,255,0.05)] hover:bg-transparent">
+              <TableRow key={headerGroup.id} className="border-b border-white/[0.06] hover:bg-transparent">
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} colSpan={header.colSpan} className="text-[#A1A1A6] font-semibold h-12">
+                  <TableHead key={header.id} colSpan={header.colSpan} className="text-[#8E8E93] font-semibold h-11 px-4">
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -95,10 +95,9 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="border-b-[rgba(255,255,255,0.05)] hover:bg-[rgba(255,255,255,0.03)] transition-colors data-[state=selected]:bg-[rgba(210,248,2,0.08)]"
-                >
+                  className="border-b border-white/[0.04] hover:bg-[#2C2C2E]/40 transition-colors duration-150 data-[state=selected]:bg-[rgba(210,248,2,0.06)]">
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="py-4 text-sm text-[#F5F5F7]">
+                    <TableCell key={cell.id} className="py-3.5 px-4 text-sm text-[#F5F5F7]">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

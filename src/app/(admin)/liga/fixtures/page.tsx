@@ -2,13 +2,6 @@ import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
   Table,
   TableBody,
   TableCell,
@@ -109,21 +102,22 @@ export default async function FixturesPage({
   const activeLiga = selectedSeason?.liga || Object.keys(seasonsByLiga)[0] || 'liga1';
 
   return (
-    <div className="space-y-6">
+    <div className="p-6 space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Fixtures & Scores</h1>
-        <p className="text-muted-foreground">
+        <h1 className="text-2xl font-bold tracking-tight text-[#F5F5F7]">Fixtures & Scores</h1>
+        <p className="mt-1.5 text-sm text-[#A1A1A6]">
           Manage liga fixtures and match scores.
         </p>
+        <div className="mt-4 h-px bg-gradient-to-r from-[#D2F802]/20 via-white/[0.06] to-transparent" />
       </div>
 
       {/* Season Selector as Tabs */}
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-sm uppercase tracking-wide">Select Season</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className="glass-card rounded-[16px] overflow-hidden">
+        <div className="p-5 border-b border-white/[0.06]">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8E8E93]">Select Season</p>
+        </div>
+        <div className="p-5">
           <Tabs defaultValue={activeLiga}>
             <TabsList className="mb-4">
               {Object.keys(seasonsByLiga).map((liga) => (
@@ -149,41 +143,37 @@ export default async function FixturesPage({
               </TabsContent>
             ))}
           </Tabs>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Content */}
       {!selectedSeasonId ? (
-        <Card>
-          <CardContent className="py-12 text-center">
-            <p className="text-muted-foreground">Select a season to view fixtures</p>
-          </CardContent>
-        </Card>
+        <div className="glass-card rounded-[16px] p-10 text-center">
+          <p className="text-[#A1A1A6]">Select a season to view fixtures</p>
+        </div>
       ) : (
         <>
           {/* Fixtures by Gameweek */}
           <div className="space-y-6">
             {sortedGameweeks.length === 0 ? (
-              <Card>
-                <CardContent className="py-12 text-center">
-                  <p className="text-muted-foreground mb-4">
-                    No fixtures yet for {selectedSeason?.name}
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="glass-card rounded-[16px] p-10 text-center">
+                <p className="text-[#A1A1A6] mb-4">
+                  No fixtures yet for {selectedSeason?.name}
+                </p>
+              </div>
             ) : (
               sortedGameweeks.map((gameweek) => {
                 const gameweekFixtures = fixturesByGameweek[gameweek];
 
                 return (
-                  <Card key={gameweek}>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-                      <CardTitle>Gameweek {gameweek}</CardTitle>
+                  <div className="glass-card rounded-[16px] overflow-hidden" key={gameweek}>
+                    <div className="flex flex-row items-center justify-between p-5 border-b border-white/[0.06]">
+                      <h3 className="text-base font-semibold text-[#F5F5F7]">Gameweek {gameweek}</h3>
                       <Button size="sm" variant="outline" disabled title="Coming soon — requires Supabase integration">
                         + Add Fixture
                       </Button>
-                    </CardHeader>
-                    <CardContent className="p-0">
+                    </div>
+                    <div className="p-0">
                       <Table>
                         <TableHeader>
                           <TableRow>
@@ -240,18 +230,18 @@ export default async function FixturesPage({
                           })}
                         </TableBody>
                       </Table>
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </div>
                 );
               })
             )}
           </div>
 
           {/* Season summary footer */}
-          <CardDescription className="text-center">
+          <p className="text-center text-sm text-[#8E8E93]">
             {selectedSeason?.name} \u2014 {fixtures.length} fixture(s) across{' '}
             {sortedGameweeks.length} gameweek(s)
-          </CardDescription>
+          </p>
         </>
       )}
     </div>

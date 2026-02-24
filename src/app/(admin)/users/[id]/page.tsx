@@ -51,7 +51,7 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
 
   return (
     <div className="p-6 space-y-6">
-      <Link href="/users" className="inline-flex items-center gap-1.5 text-sm text-[#A1A1A6] hover:text-[#F5F5F7] transition-colors">
+      <Link href="/users" className="inline-flex items-center gap-1.5 text-sm text-[#A1A1A6] hover:text-[#D2F802] transition-colors duration-200">
         <IconArrowLeft className="w-4 h-4" /> Back to Users
       </Link>
 
@@ -60,7 +60,7 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
       {/* Profile header card */}
       <div className="glass-card p-6 rounded-[16px]">
         <div className="flex items-start gap-6">
-          <Avatar className="h-20 w-20 bg-[#2C2C2E] border border-white/[0.08] text-xl">
+          <Avatar className="h-20 w-20 bg-[#2C2C2E] border-2 border-white/[0.08] text-xl ring-2 ring-white/[0.04] ring-offset-2 ring-offset-transparent">
             <AvatarFallback className="bg-[#2C2C2E] text-[#A1A1A6] text-lg font-medium">
               {getInitials(user.name)}
             </AvatarFallback>
@@ -89,7 +89,7 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
       </div>
 
       {/* Stats row */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-5">
         {[
           { label: "Wins", value: p.wins, color: "text-[#30D158]" },
           { label: "Losses", value: p.losses, color: "text-[#EF4444]" },
@@ -100,7 +100,7 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
           },
           { label: "PBPI Grading", value: p.pbpi_grading, color: "text-[#D2F802]" },
         ].map((stat) => (
-          <div key={stat.label} className="glass-card p-5 rounded-[16px] text-center">
+          <div key={stat.label} className="glass-card p-5 rounded-[16px] text-center transition-all duration-200 hover:bg-white/[0.04]">
             <p className={cn("text-3xl font-bold font-mono tabular-nums", stat.color)}>
               {stat.value}
             </p>
@@ -119,7 +119,7 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
             {userMatches.map((m) => (
               <div
                 key={m.id}
-                className="flex items-center justify-between rounded-xl bg-white/[0.03] px-4 py-3 border border-white/[0.04]"
+                className="flex items-center justify-between rounded-xl bg-white/[0.03] px-4 py-3 border border-white/[0.04] transition-all duration-200 hover:bg-white/[0.06] hover:border-white/[0.08]"
               >
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-[#F5F5F7] truncate">
