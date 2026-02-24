@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RNKD Admin Dashboard
 
-## Getting Started
+> Internal operations dashboard for the **RNKD Padel** platform — manage players, matches, rankings, and liga fixtures in one place.
 
-First, run the development server:
+**[🔗 Live Demo → rnkd-admin.vercel.app](https://rnkd-admin.vercel.app)**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## What it does
+
+RNKD Admin gives operators a single command center to run the padel ecosystem:
+
+| Module | Description |
+|--------|-------------|
+| **Dashboard** | Real-time KPIs — active players, matches played, avg MMR, tier distribution |
+| **User Management** | Full player roster with MMR history, tier badges, and profile detail view |
+| **Match Management** | Complete match log with scores, MMR deltas, and per-match breakdowns |
+| **Liga Fixtures** | Season fixture scheduling, registrations, and standings management |
+| **Analytics** _(coming soon)_ | Revenue, retention, and engagement metrics |
+| **Tournaments** _(coming soon)_ | Bracket management and event tracking |
+
+---
+
+## Stack
+
+- **Framework** — [Next.js 14](https://nextjs.org) App Router
+- **UI Components** — [shadcn/ui](https://ui.shadcn.com) (New York style)
+- **Styling** — [Tailwind CSS v3](https://tailwindcss.com) with custom RNKD design tokens
+- **Tables** — [TanStack Table v8](https://tanstack.com/table) with sorting, filtering, pagination
+- **Charts** — [Recharts](https://recharts.org)
+- **Font** — JetBrains Mono (stats & numbers), system sans (UI)
+- **Deployment** — [Vercel](https://vercel.com)
+
+---
+
+## Design System
+
+The dashboard uses the RNKD dark theme — built for desktop operators at 1280px+.
+
+```
+Background     #000000   — true black canvas
+Cards          #1C1C1E   — elevated surface
+Hover          #2C2C2E   — interactive feedback
+
+Volt           #D2F802   — primary CTA, active states
+Mint           #30D158   — success, positive MMR
+Red            #EF4444   — errors, losses
+Orange         #FF9F0A   — pending, warnings
+Blue           #0A84FF   — info, links
+
+Text primary   #F5F5F7
+Text secondary #A1A1A6
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Glass cards, volt accent borders on active nav, and monospaced numbers throughout.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Local Development
 
-## Learn More
+```bash
+# Clone
+git clone https://github.com/database-zuma/rnkd-admin.git
+cd rnkd-admin
 
-To learn more about Next.js, take a look at the following resources:
+# Install
+npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Run dev server
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Open [http://localhost:3000](http://localhost:3000) — it redirects to `/dashboard`.
 
-## Deploy on Vercel
+> **Note:** The app currently runs on mock data. Supabase integration is wired up in `src/lib/supabase/` and ready to connect once credentials are provided.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── login/                    Login page
+│   └── (admin)/
+│       ├── layout.tsx            Admin shell (sidebar + content)
+│       ├── dashboard/            Overview with charts and KPIs
+│       ├── users/                Player list + [id] detail
+│       ├── matches/              Match log + [id] detail
+│       └── liga/
+│           ├── fixtures/         Fixture list + [fixtureId] detail
+│           ├── seasons/
+│           ├── registrations/
+│           └── standings/
+├── components/
+│   ├── layout/                   Sidebar, page header
+│   ├── dashboard/                Chart components (client)
+│   └── shared/                   DataTable, badges, MMR display
+└── lib/
+    ├── mock-data/                 users.ts · matches.ts · liga.ts
+    ├── data/                      DAL — getUsers, getMatches, getDashboardStats
+    └── supabase/                  Client + server Supabase instances
+```
+
+---
+
+## Deployment
+
+Hosted on Vercel. Any push to `main` redeploys automatically.
+
+```bash
+# Manual deploy
+vercel --prod --yes
+```
+
+---
+
+## Roadmap
+
+- [ ] Connect Supabase for live data
+- [ ] Analytics page — revenue & retention charts
+- [ ] Tournament bracket manager
+- [ ] Push notification center
+- [ ] Role-based access (admin vs. operator)
+- [ ] Audit log with change history
