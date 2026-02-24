@@ -98,7 +98,7 @@ export const mockFixtures: Fixture[] = [
     scheduled_date: '2025-03-15',
     scheduled_time: '16:00',
     venue_name: 'Surabaya Sports Center',
-    status: 'in_progress',
+    status: 'scheduled',
     home_matches_won: null,
     away_matches_won: null,
     home_club: { id: 'club-3', name: 'Surabaya Spin' },

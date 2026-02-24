@@ -1,4 +1,13 @@
+"use client";
+
+
 export default function LoginPage() {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: Implement authentication logic
+    console.log('Login submitted');
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-black relative overflow-hidden">
       {/* Radial gradient background */}
@@ -14,7 +23,7 @@ export default function LoginPage() {
         </div>
 
         {/* Form */}
-        <form action="#" className="space-y-5 animate-fade-in-up-delay-1">
+        <form onSubmit={handleSubmit} className="space-y-5 animate-fade-in-up-delay-1">
           <div className="space-y-2">
             <label htmlFor="email" className="block text-sm font-medium text-[#F5F5F7]">
               Email
@@ -36,7 +45,7 @@ export default function LoginPage() {
               id="password"
               name="password"
               type="password"
-              placeholder="\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
+              placeholder="••••••••"
               className="block w-full rounded-xl bg-[#2C2C2E]/80 border border-white/[0.08] px-4 py-3 text-sm text-[#F5F5F7] placeholder:text-[#8E8E93] outline-none focus:ring-2 focus:ring-[#D2F802]/30 focus:border-[#D2F802]/20 transition-all duration-200"
             />
           </div>
@@ -50,7 +59,7 @@ export default function LoginPage() {
         </form>
 
         <p className="mt-8 text-center text-xs text-[#8E8E93] animate-fade-in-up-delay-2">
-          RNKD Padel &middot; Operations Dashboard
+          RNKD Padel · Operations Dashboard
         </p>
       </div>
     </div>

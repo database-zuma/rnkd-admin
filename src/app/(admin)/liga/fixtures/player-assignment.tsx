@@ -173,8 +173,8 @@ export function PlayerAssignment({
             ⚠️ Warnings:
           </p>
           <ul className="list-disc list-inside space-y-1 ml-1 text-rnkd-text-secondary">
-            {warnings.map((w) => (
-              <li key={w}>{w}</li>
+            {warnings.map((w, i) => (
+              <li key={`warning-${i}`}>{w}</li>
             ))}
           </ul>
         </div>
