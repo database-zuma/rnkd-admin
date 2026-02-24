@@ -2,26 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 0%;           /* #000000 */
+    --foreground: 240 5% 96%;        /* #F5F5F7 */
+    --card: 240 6% 11%;              /* #1C1C1E */
+    --card-foreground: 240 5% 96%;
+    --primary: 72 97% 50%;           /* #D2F802 (Volt) */
+    --primary-foreground: 0 0% 0%;
+    --secondary: 142 69% 58%;        /* #30D158 (Mint) */
+    --secondary-foreground: 0 0% 0%;
+    --destructive: 0 84% 60%;        /* #EF4444 */
+    --destructive-foreground: 240 5% 96%;
+    --muted: 240 5% 18%;             /* #2C2C2E */
+    --muted-foreground: 240 4% 65%;  /* #A1A1A6 */
+    --accent: 240 5% 18%;
+    --accent-foreground: 240 5% 96%;
+    --border: 0 0% 100% / 0.08;
+    --input: 0 0% 100% / 0.08;
+    --ring: 72 97% 50%;              /* Volt focus ring */
+    --radius: 16px;
+    --chart-1: 72 97% 50%;           /* Volt */
+    --chart-2: 142 69% 58%;          /* Mint */
+    --chart-3: 211 100% 52%;         /* Blue */
+    --chart-4: 0 84% 60%;            /* Red */
+    --chart-5: 36 100% 52%;          /* Orange */
+    --sidebar-background: 240 6% 11%;
+    --sidebar-foreground: 240 5% 96%;
+    --sidebar-primary: 72 97% 50%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 240 5% 18%;
+    --sidebar-accent-foreground: 240 5% 96%;
+    --sidebar-border: 0 0% 100% / 0.08;
+    --sidebar-ring: 72 97% 50%;
+  }
+
+  .dark {
+    --background: 0 0% 0%;           /* #000000 */
+    --foreground: 240 5% 96%;        /* #F5F5F7 */
+    --card: 240 6% 11%;              /* #1C1C1E */
+    --card-foreground: 240 5% 96%;
+    --primary: 72 97% 50%;           /* #D2F802 (Volt) */
+    --primary-foreground: 0 0% 0%;
+    --secondary: 142 69% 58%;        /* #30D158 (Mint) */
+    --secondary-foreground: 0 0% 0%;
+    --destructive: 0 84% 60%;        /* #EF4444 */
+    --destructive-foreground: 240 5% 96%;
+    --muted: 240 5% 18%;             /* #2C2C2E */
+    --muted-foreground: 240 4% 65%;  /* #A1A1A6 */
+    --accent: 240 5% 18%;
+    --accent-foreground: 240 5% 96%;
+    --border: 0 0% 100% / 0.08;
+    --input: 0 0% 100% / 0.08;
+    --ring: 72 97% 50%;              /* Volt focus ring */
+    --radius: 16px;
+    --chart-1: 72 97% 50%;           /* Volt */
+    --chart-2: 142 69% 58%;          /* Mint */
+    --chart-3: 211 100% 52%;         /* Blue */
+    --chart-4: 0 84% 60%;            /* Red */
+    --chart-5: 36 100% 52%;          /* Orange */
+    --sidebar-background: 240 6% 11%;
+    --sidebar-foreground: 240 5% 96%;
+    --sidebar-primary: 72 97% 50%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 240 5% 18%;
+    --sidebar-accent-foreground: 240 5% 96%;
+    --sidebar-border: 0 0% 100% / 0.08;
+    --sidebar-ring: 72 97% 50%;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-black text-[#F5F5F7] antialiased;
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.glass-card {
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+}
+
+.glass-panel {
+  background: rgba(18, 18, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
 }
